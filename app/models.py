@@ -15,8 +15,8 @@ class Flight(db.Model):
     num_pass = db.Column(db.Integer, nullable=False)
     ticket_price = db.Column(db.Integer, nullable=False)
     ticket_class = db.Column(db.String(25), nullable=False)
-    distance = db.Column(db.Integer)
-    travel_time = db.Column(db.Integer)
+    distance = db.Column(db.String(25), nullable=False)
+    travel_time = db.Column(db.Integer, nullable=False)
 
     customer = db.relationship('Customer', back_populates='flights')
 

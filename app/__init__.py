@@ -31,7 +31,7 @@ def create_app():
 
     @app.route("/users", methods=["POST"])
     @requires_auth
-    def updateUser():
+    def update_user():
         body = request.get_json()
         # checks if there there is user in db
         db_user = Customer.query.filter_by(email=body['email']).first()
@@ -47,5 +47,40 @@ def create_app():
             db.session.commit()
 
             return jsonify({'userId': new_user.id}), 201
+
+    @app.route("/flights", methods=["GET"])
+    def create_flight():
+        body = request.get_json()
+        new_flight = Flight(customer_id=body['customer_id'],
+                            depart_date=body['depart_date'],
+                            depart_loc=body['depart_loc'],
+                            arrive_loc=body['arrive_loc'],
+                            num_pass=body['num_pass'],
+                            ticket_price=body['ticket_price'],
+                            ticket_class=body['ticket_class'],
+                            distance=body['distance'],
+                            travel_time=body['travel_time'])
+        db.session.add(new_flight)
+        db.session.commit()
+
+        return 'Flight created', 201
+
+    @app.route("/flights", methods=["POST"])
+    @requires_auth
+    def create_flight():
+        body = request.get_json()
+        new_flight = Flight(customer_id=body['customer_id'],
+                            depart_date=body['depart_date'],
+                            depart_loc=body['depart_loc'],
+                            arrive_loc=body['arrive_loc'],
+                            num_pass=body['num_pass'],
+                            ticket_price=body['ticket_price'],
+                            ticket_class=body['ticket_class'],
+                            distance=body['distance'],
+                            travel_time=body['travel_time'])
+        db.session.add(new_flight)
+        db.session.commit()
+
+        return 'Flight created', 201
 
     return app

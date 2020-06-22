@@ -1,8 +1,8 @@
-"""initial migration file
+"""initlal migration file
 
-Revision ID: 0fca6a370655
+Revision ID: 03357b52c8c7
 Revises: 
-Create Date: 2020-06-19 09:36:16.924676
+Create Date: 2020-06-22 13:07:17.943038
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0fca6a370655'
+revision = '03357b52c8c7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,8 +37,8 @@ def upgrade():
     sa.Column('num_pass', sa.Integer(), nullable=False),
     sa.Column('ticket_price', sa.Integer(), nullable=False),
     sa.Column('ticket_class', sa.String(length=25), nullable=False),
-    sa.Column('distance', sa.Integer(), nullable=True),
-    sa.Column('travel_time', sa.Integer(), nullable=True),
+    sa.Column('distance', sa.String(length=25), nullable=False),
+    sa.Column('travel_time', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['customer_id'], ['customers.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
