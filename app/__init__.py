@@ -48,22 +48,12 @@ def create_app():
 
             return jsonify({'userId': new_user.id}), 201
 
-    @app.route("/flights", methods=["GET"])
-    def create_flight():
-        body = request.get_json()
-        new_flight = Flight(customer_id=body['customer_id'],
-                            depart_date=body['depart_date'],
-                            depart_loc=body['depart_loc'],
-                            arrive_loc=body['arrive_loc'],
-                            num_pass=body['num_pass'],
-                            ticket_price=body['ticket_price'],
-                            ticket_class=body['ticket_class'],
-                            distance=body['distance'],
-                            travel_time=body['travel_time'])
-        db.session.add(new_flight)
-        db.session.commit()
-
-        return 'Flight created', 201
+    @app.route("/flights/<int:id>")
+    @requires_auth
+    def get_flights(id):
+        flights_for_user = Flight.query.filter(Flight.customer_id == id).all()
+        flights = [flight.to_dict() for flight in flights_for_user]
+        return jsonify(flights)
 
     @app.route("/flights", methods=["POST"])
     @requires_auth

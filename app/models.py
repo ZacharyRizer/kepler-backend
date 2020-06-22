@@ -20,6 +20,20 @@ class Flight(db.Model):
 
     customer = db.relationship('Customer', back_populates='flights')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'customer_id': self.customer_id,
+            'depart_date': self.depart_date,
+            'depart_loc': self.depart_loc,
+            'arrive_loc': self.arrive_loc,
+            'num_pass': self.num_pass,
+            'ticket_price': self.ticket_price,
+            'ticket_class': self.ticket_class,
+            'distance': self.distance,
+            'travel_time': self.travel_time
+        }
+
 
 class Customer(db.Model):
     __tablename__ = 'customers'
