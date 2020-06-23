@@ -26,8 +26,17 @@ def create_app():
         depart = req['depart']
         arrive = req['arrive']
         date = req['date']
-        distance = calculate_trip(depart, arrive, date)
-        return {'distance': distance.value}
+        distance = calculate_trip(depart, arrive, date).value
+        return {'distance': distance}
+
+    @app.route("/calculate-low-fares", methods=["POST"])
+    def calculate_trips():
+        req = request.get_json()
+        depart = req['depart']
+        arrive = req['arrive']
+        dates = req['dates']
+        distances = [calculate_trip(depart, arrive, date).value for date in dates]
+        return {'distances': distances}
 
     @app.route("/users", methods=["POST"])
     @requires_auth
