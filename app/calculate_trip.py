@@ -10,5 +10,6 @@ def calculate_trip(depart, arrive, date):
     start = get_body_barycentric(depart, t)
     end = get_body_barycentric(arrive, t)
 
-    distance = ((start.xyz[0] - end.xyz[0])**2 + (start.xyz[1] - end.xyz[1])**2 + (start.xyz[2] - end.xyz[2])**2)**(1/2)
+    distance = ((start.x - end.x)**2 + (start.y - end.y)**2 + (start.z - end.z)**2)**(1/2)
     return distance.to(u.km)
+
