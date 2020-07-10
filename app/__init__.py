@@ -20,6 +20,10 @@ def create_app():
         response.status_code = ex.status_code
         return response
 
+    @app.route("/", methods=["GET"])
+    def wakeDyno():
+        return 'Waking them Dynosaurs!'
+
     @app.route("/calculate-trip", methods=["POST"])
     def calculate():
         req = request.get_json()
