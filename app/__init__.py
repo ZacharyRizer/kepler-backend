@@ -1,10 +1,11 @@
-from flask import Flask, request, jsonify
-from flask_cors import cross_origin, CORS
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
-from .config import Configuration
-from .models import db, Customer, Flight
+
 from .auth import AuthError, requires_auth
 from .calculate_trip import calculate_trip
+from .config import Configuration
+from .models import Customer, Flight, db
 
 
 def create_app():
