@@ -40,7 +40,8 @@ def create_app():
         depart = req['depart']
         arrive = req['arrive']
         dates = req['dates']
-        distances = [calculate_trip(depart, arrive, date).value for date in dates]
+        distances = [calculate_trip(
+            depart, arrive, date).value for date in dates]
         return {'distances': distances}
 
     @app.route("/users", methods=["POST"])
